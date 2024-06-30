@@ -4,17 +4,36 @@ on:
 
 jobs:
   tsc:
-    name: tsc
+    name: Compile TypeScript and Concatenate JS
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: install node v18
+
+    - name: Install Node.js v18
       uses: actions/setup-node@v1
       with:
         node-version: 18
-    - name: yarn install
+
+    - name: Install Dependencies
       run: yarn install
-    - name: install types for node
+
+    - name: Install Types for Node
       run: yarn add @types/node --dev
-    - name: tsc
+
+    - name: Compile TypeScript
       uses: icrawl/action-tsc@v1
+
+    - name: Concatenate JavaScript Files
+      run: |
+        mkdir -p dist
+        cat dist/**/*.js > dist/compiled.js
+
+    - name: Commit and Push compiled.js
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add dist/compiled.js
+        git commit -m 'Add compiled.js'
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
