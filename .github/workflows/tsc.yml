@@ -33,7 +33,7 @@ jobs:
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
         git add dist/compiled.js
-        git commit -m 'Add compiled.js'
+        git commit -m 'chore: add compiled.js [skip ci]'
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
