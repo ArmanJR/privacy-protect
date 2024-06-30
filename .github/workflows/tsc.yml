@@ -21,7 +21,7 @@ jobs:
       run: yarn add @types/node --dev
 
     - name: Compile TypeScript
-      uses: icrawl/action-tsc@v1
+      run: yarn tsc
 
     - name: Concatenate JavaScript Files
       run: |
