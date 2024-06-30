@@ -12,9 +12,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 18
-    - name: npm install
-      run: npm install
     - name: yarn install
       run: yarn install
+    - name: install types for node
+      run: yarn add @types/node --dev
     - name: tsc
       uses: icrawl/action-tsc@v1
