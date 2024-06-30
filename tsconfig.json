@@ -13,7 +13,8 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "strict": true
+    "strict": true,
+    "outDir": "./dist"
   },
   "include": [
     "./.svelte-kit/ambient.d.ts",
