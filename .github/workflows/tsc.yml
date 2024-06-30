@@ -28,12 +28,17 @@ jobs:
         mkdir -p dist
         cat dist/**/*.js > dist/compiled.js
 
+    - name: Get current branch
+      id: vars
+      run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
+
     - name: Commit and Push compiled.js
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
         git add dist/compiled.js
         git commit -m 'chore: add compiled.js [skip ci]'
-        git push
+        git push origin HEAD:$GITHUB_ENV_BRANCH
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_ENV_BRANCH: ${{ env.branch }}
